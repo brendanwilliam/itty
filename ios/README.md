@@ -138,7 +138,12 @@ can't stop a loop.
 **Terminal definitions.** A device has no terminfo, so `Terminfo/` (compiled
 with `tic` from xterm-256color and Ghostty's entry) is bundled and
 `TERMINFO` points at it; this is what dash's "Cannot read termcap database"
-warning needed.
+warning needed. Each entry is stored twice, in macOS's hex-named directories
+(`78/xterm-256color`) and in the letter-named ones (`x/xterm-256color`), because
+which one a library looks in depends on how it was built. They are compiled
+with macOS's own `/usr/bin/tic` (ncurses 6.0), not Homebrew's or MacPorts':
+newer `tic` writes the 32-bit-number format (magic `1e02`), which the older
+ncurses on iOS reported as "No entry for terminal type".
 
 **Simulator.** vim and lg2 are only published for devices (and Intel
 simulators), so an Apple-silicon simulator can't load them as shipped. Run
