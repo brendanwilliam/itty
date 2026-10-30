@@ -25,7 +25,7 @@ fi
 rm -rf "$out"
 mkdir -p "$out"
 
-version="$(cherri --version | head -n 1)"
+version="$(cherri --version | head -n 1 | sed -e 's/\x1b\[[0-9;]*m//g')"
 manifest="$out/manifest.json"
 printf '{\n  "cherri": "%s",\n  "shortcuts": [' "$version" > "$manifest"
 

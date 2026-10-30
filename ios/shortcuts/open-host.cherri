@@ -1,8 +1,10 @@
 /* Opens a saved Ghostty host. */
 
 #define name Open Host
-#define glyph terminal
+#define glyph laptop
 #define color gray
+
+#include 'actions/web'
 
 #question hostName "Which Ghostty host should this open? Use its name as saved in the app." "My Mac"
 

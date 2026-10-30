@@ -1,6 +1,6 @@
 # Cherri-built Shortcuts with a one-tap import link (iOS)
 
-Status: built, not yet verified on a device. The spike below is still open.
+Status: built and signed on a Mac; not yet verified on a device. The spike below is still open.
 
 ## What was built
 
@@ -22,9 +22,9 @@ Cherri is GPL-2.0 and is only run as a build tool; nothing from it is linked int
 
 ## Still to verify (needs a Mac signer and a real iPhone)
 
-1. Run `scripts/build-shortcuts.sh` with Cherri installed. It has only been checked as far as its "cherri missing" guard, so
-   signing and the `AEA1` check have not run. `open-host.cherri` was written against the Cherri source at the pinned commit
-   (`#question`, `urlEncode`, `openURL`) but never compiled.
+1. Done on a Mac with Cherri 2.3.0: `scripts/build-shortcuts.sh` compiles and signs `open-host.cherri`, the output starts with
+   `AEA1`, and `manifest.json` is written. Building it found three mistakes, now fixed: an invalid glyph, a missing
+   `#include 'actions/web'`, and ANSI colors in the version string.
 2. Open the signed file on an iPhone: the import prompt appears and the shortcut can be edited.
 3. Publish to Pages and confirm `shortcuts://import-shortcut?url=…` works from the app button and from Safari.
 4. Confirm the import question shows on iOS and survives signing, and that running the shortcut opens the right host.
