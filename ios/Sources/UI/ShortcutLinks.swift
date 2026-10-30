@@ -8,7 +8,7 @@ import Foundation
 /// and published by `.github/workflows/ios-shortcuts.yml`.
 enum ShortcutLinks {
     /// Where the signed files live. The only place the address is written.
-    static let baseURL = URL(string: "https://brendanwilliam.github.io/ghostty/shortcuts/")!
+    static let baseURL = URL(string: "https://brendanwilliam.github.io/itty/shortcuts/")!
 
     struct Offering: Identifiable, Equatable {
         /// The name Shortcuts shows, and the stem of the hosted file.

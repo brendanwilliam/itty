@@ -1,4 +1,10 @@
-# Ghostty for iOS
+> **itty (iOS Teletypewriter) is an unofficial, independent project.** It is not
+> the Ghostty iOS app and is not affiliated with, endorsed by, or supported by
+> the Ghostty project or its maintainers. It uses libghostty, Ghostty's
+> terminal core, under the MIT license. The upstream project is at
+> https://github.com/ghostty-org/ghostty. The app lives in [`ios/`](ios/).
+
+# itty: an iOS terminal built on libghostty
 
 An iOS terminal built on libghostty (Ghostty's terminal emulator and Metal
 renderer). It connects to a Mac (or any SSH server) on the local network, and
