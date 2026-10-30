@@ -4,7 +4,7 @@ Status: built and signed on a Mac; not yet verified on a device. The spike below
 
 ## What was built
 
-- **Deep link:** `ghostty-ios://connect?host=<name>` (`Sources/App/DeepLink.swift`, `CFBundleURLTypes` in
+- **Deep link:** `itty://connect?host=<name>` (`Sources/App/DeepLink.swift`, `CFBundleURLTypes` in
   `Config/Info.plist`, `.onOpenURL` in `HostListView`). It opens a saved host by exact name, ignoring case, or `This iPhone`.
   Unknown, empty and duplicate names do nothing, and any other route or parameter is rejected. It never runs a command or
   creates a host or key, because any app or web page can open the URL. `HostStore.host(named:)` is the lookup.

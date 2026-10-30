@@ -6,8 +6,8 @@ final class DeviceKeyTests: XCTestCase {
     private let key = Curve25519.Signing.PrivateKey()
 
     func testAuthorizeCommandIsOneLineThatAddsTheKey() {
-        let line = DeviceKey.authorizedKeysLine(for: key, comment: "ghostty-ios@Brendans-iPhone")
-        let command = DeviceKey.authorizeCommand(for: key, comment: "ghostty-ios@Brendans-iPhone")
+        let line = DeviceKey.authorizedKeysLine(for: key, comment: "itty@Brendans-iPhone")
+        let command = DeviceKey.authorizeCommand(for: key, comment: "itty@Brendans-iPhone")
 
         XCTAssertFalse(command.contains("\n"), "one command to paste")
         XCTAssertEqual(command.components(separatedBy: line).count - 1, 1, "the key appears once")
@@ -21,12 +21,12 @@ final class DeviceKeyTests: XCTestCase {
     }
 
     func testTheShownKeyHidesMostOfIt() {
-        let line = DeviceKey.authorizedKeysLine(for: key, comment: "ghostty-ios@Brendans-iPhone")
+        let line = DeviceKey.authorizedKeysLine(for: key, comment: "itty@Brendans-iPhone")
         let blob = line.split(separator: " ")[1]
         let masked = DeviceKey.masked(line)
 
         XCTAssertTrue(masked.hasPrefix("ssh-ed25519 ••••••••••••••••"), masked)
-        XCTAssertTrue(masked.hasSuffix(" ghostty-ios@Brendans-iPhone"), masked)
+        XCTAssertTrue(masked.hasSuffix(" itty@Brendans-iPhone"), masked)
         XCTAssertTrue(masked.contains(blob.suffix(6)), "the end, to recognize it")
         XCTAssertFalse(masked.contains(blob.prefix(24)), "the start is hidden")
         XCTAssertFalse(masked.contains(blob), "never the whole key")

@@ -33,7 +33,7 @@ struct ShortcutFilesView: View {
                     CodeBlock(text: ShortcutLinks.fileURL(for: unopened).absoluteString, wraps: true)
                 }
             } header: {
-                Text("From Ghostty")
+                Text("From itty")
             } footer: {
                 Text("Shortcuts asks you to confirm before adding one, and you can edit it afterwards.")
             }

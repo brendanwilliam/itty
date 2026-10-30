@@ -19,7 +19,7 @@ enum ShortcutLinks {
     }
 
     static let offerings = [
-        Offering(name: "Open Host", summary: "Asks for a saved host's name, then opens it in Ghostty."),
+        Offering(name: "Open Host", summary: "Asks for a saved host's name, then opens it in itty."),
     ]
 
     /// The hosted file for an offering.

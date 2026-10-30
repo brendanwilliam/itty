@@ -6,7 +6,7 @@ build tool; nothing from it is linked into the app).
 
 | Source | Shortcut | What it does |
 | --- | --- | --- |
-| `open-host.cherri` | Open Host | Asks (at import time) for a saved host's name, then opens `ghostty-ios://connect?host=<name>`. |
+| `open-host.cherri` | Open Host | Asks (at import time) for a saved host's name, then opens `itty://connect?host=<name>`. |
 
 ## Build
 
@@ -27,9 +27,9 @@ The file name is the published name: `open-host.cherri` becomes
 `open-host.shortcut`, and `ShortcutLinks.fileURL(for:)` derives the same name
 from the offering's title.
 
-## The `ghostty-ios://` link
+## The `itty://` link
 
-`ghostty-ios://connect?host=<name>` opens a host that is already saved (or
+`itty://connect?host=<name>` opens a host that is already saved (or
 `This iPhone`). Any app or web page can open this URL, so the handler
 (`Sources/App/DeepLink.swift`) only selects an existing host by name: it
 never runs a command and never creates a host or key. Unknown or duplicate

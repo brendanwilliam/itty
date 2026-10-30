@@ -68,7 +68,7 @@ enum DeviceKey {
         let name = UIDevice.current.name
             .replacingOccurrences(of: " ", with: "-")
             .filter { $0.isLetter || $0.isNumber || $0 == "-" }
-        return "ghostty-ios@\(name.isEmpty ? "device" : name)"
+        return "itty@\(name.isEmpty ? "device" : name)"
     }
 }
 

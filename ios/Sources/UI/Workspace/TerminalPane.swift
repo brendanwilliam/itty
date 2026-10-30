@@ -104,7 +104,7 @@ final class TerminalPane: ObservableObject, Identifiable {
     ///   zmx session (never a fresh shell) and doesn't refresh the config.
     private func makeConnection(password: String?, handingOff: Bool) -> (TerminalSurfaceView, BackendLink)? {
         guard let app = GhosttyRuntime.shared.app else {
-            title = "Ghostty failed to initialize"
+            title = "itty failed to initialize"
             return nil
         }
 

@@ -194,6 +194,6 @@ screen). They are written in `shortcuts/*.cherri`, signed on a Mac with
 published to GitHub Pages by `.github/workflows/ios-shortcuts.yml` (push a tag
 named `ios-shortcuts-*`). The address is `ShortcutLinks.baseURL`.
 
-Open Host uses the `ghostty-ios://connect?host=<name>` link, which opens a
+Open Host uses the `itty://connect?host=<name>` link, which opens a
 saved host and nothing else (`Sources/App/DeepLink.swift`). See
 `shortcuts/README.md`.

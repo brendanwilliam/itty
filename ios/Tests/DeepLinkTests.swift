@@ -1,7 +1,7 @@
 import XCTest
 @testable import GhosttyiOS
 
-/// `ghostty-ios://` links open a saved host and nothing else: any app or
+/// `itty://` links open a saved host and nothing else: any app or
 /// web page can open one.
 @MainActor
 final class DeepLinkTests: XCTestCase {
@@ -20,21 +20,21 @@ final class DeepLinkTests: XCTestCase {
     }
 
     func testConnectNamesAHost() {
-        XCTAssertEqual(parse("ghostty-ios://connect?host=Laptop"), .connect(host: "Laptop"))
-        XCTAssertEqual(parse("ghostty-ios://connect?host=Studio%20Mac"), .connect(host: "Studio Mac"))
-        XCTAssertEqual(parse("GHOSTTY-IOS://connect/?host=Laptop"), .connect(host: "Laptop"))
+        XCTAssertEqual(parse("itty://connect?host=Laptop"), .connect(host: "Laptop"))
+        XCTAssertEqual(parse("itty://connect?host=Studio%20Mac"), .connect(host: "Studio Mac"))
+        XCTAssertEqual(parse("ITTY://connect/?host=Laptop"), .connect(host: "Laptop"))
     }
 
     func testAnythingElseIsRejected() {
         XCTAssertNil(parse("https://connect?host=Laptop"), "wrong scheme")
-        XCTAssertNil(parse("ghostty-ios://run?host=Laptop"), "unknown route")
-        XCTAssertNil(parse("ghostty-ios://connect/extra?host=Laptop"), "extra path")
-        XCTAssertNil(parse("ghostty-ios://connect"), "no host")
-        XCTAssertNil(parse("ghostty-ios://connect?host="), "empty host")
-        XCTAssertNil(parse("ghostty-ios://connect?name=Laptop"), "wrong parameter")
-        XCTAssertNil(parse("ghostty-ios://connect?host=Laptop&command=ls"), "extra parameter")
-        XCTAssertNil(parse("ghostty-ios://connect?host=Laptop&host=Studio%20Mac"), "two hosts")
-        XCTAssertNil(parse("ghostty-ios://connect?host=Laptop#frag"), "fragment")
+        XCTAssertNil(parse("itty://run?host=Laptop"), "unknown route")
+        XCTAssertNil(parse("itty://connect/extra?host=Laptop"), "extra path")
+        XCTAssertNil(parse("itty://connect"), "no host")
+        XCTAssertNil(parse("itty://connect?host="), "empty host")
+        XCTAssertNil(parse("itty://connect?name=Laptop"), "wrong parameter")
+        XCTAssertNil(parse("itty://connect?host=Laptop&command=ls"), "extra parameter")
+        XCTAssertNil(parse("itty://connect?host=Laptop&host=Studio%20Mac"), "two hosts")
+        XCTAssertNil(parse("itty://connect?host=Laptop#frag"), "fragment")
     }
 
     func testResolvesASavedHostIgnoringCase() {

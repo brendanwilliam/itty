@@ -6,3 +6,4 @@ Frameworks-sim/
 
 # Signed Shortcuts built by scripts/build-shortcuts.sh
 shortcuts/dist/
+*_unsigned.shortcut

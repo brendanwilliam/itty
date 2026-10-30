@@ -82,7 +82,7 @@ struct HostListView: View {
                     }
                 }
             }
-            .navigationTitle("Ghostty")
+            .navigationTitle("itty")
             .navigationDestination(for: Host.self) { host in
                 TerminalScreen(workspace: workspaces.workspace(for: host))
             }

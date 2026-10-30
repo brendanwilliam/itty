@@ -1,11 +1,11 @@
 import Foundation
 
-/// A `ghostty-ios://` link, e.g. from a Shortcut. The only route is
-/// `ghostty-ios://connect?host=<name>`, which opens a host that is already
+/// A `itty://` link, e.g. from a Shortcut. The only route is
+/// `itty://connect?host=<name>`, which opens a host that is already
 /// saved. Any app or web page can open these URLs, so a link never runs a
 /// command and never creates a host or key; it only selects an existing one.
 enum DeepLink: Equatable {
-    static let scheme = "ghostty-ios"
+    static let scheme = "itty"
 
     case connect(host: String)
 
