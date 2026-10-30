@@ -33,13 +33,15 @@ enum ShortcutLinks {
     }
 
     static func importURL(file: URL, name: String) -> URL {
-        URL(string: "shortcuts://import-shortcut?url=\(encode(file.absoluteString))&name=\(encode(name))")!
+        URL(string: "shortcuts://import-shortcut?url=\(encode(file.absoluteString, keeping: ":/"))&name=\(encode(name))")!
     }
 
-    /// Percent-encodes everything but unreserved characters, so `&`, `=`
-    /// and `+` inside a value can't be mistaken for query syntax.
-    static func encode(_ value: String) -> String {
-        value.addingPercentEncoding(withAllowedCharacters: unreserved) ?? ""
+    /// Percent-encodes everything but unreserved characters (and `keeping`),
+    /// so `&`, `=` and `+` inside a value can't be mistaken for query syntax.
+    /// The file address keeps its `:` and `/`: with them escaped, Shortcuts
+    /// on a device answered "The shortcut URL provided was invalid".
+    static func encode(_ value: String, keeping extra: String = "") -> String {
+        value.addingPercentEncoding(withAllowedCharacters: unreserved.union(CharacterSet(charactersIn: extra))) ?? ""
     }
 
     private static let unreserved = CharacterSet(

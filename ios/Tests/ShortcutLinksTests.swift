@@ -8,7 +8,7 @@ final class ShortcutLinksTests: XCTestCase {
         let offering = ShortcutLinks.Offering(name: "Open Host", summary: "")
         XCTAssertEqual(
             ShortcutLinks.importURL(for: offering, base: base).absoluteString,
-            "shortcuts://import-shortcut?url=https%3A%2F%2Fexample.com%2Fshortcuts%2Fopen-host.shortcut&name=Open%20Host")
+            "shortcuts://import-shortcut?url=https://example.com/shortcuts/open-host.shortcut&name=Open%20Host")
     }
 
     func testFileNameIsTheLowercasedNameWithDashes() {
