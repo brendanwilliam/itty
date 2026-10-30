@@ -42,6 +42,11 @@ final class DeepLinkTests: XCTestCase {
         XCTAssertEqual(DeepLink.connect(host: "studio mac").resolve(in: store)?.hostname, "studio.local")
     }
 
+    func testApostropheStyleDoesNotMatter() {
+        store.upsert(Host(name: "Brendan\u{2019}s MacBook Pro", hostname: "mbp.local", username: "me"))
+        XCTAssertEqual(DeepLink.connect(host: "Brendan's MacBook Pro").resolve(in: store)?.hostname, "mbp.local")
+    }
+
     func testThisIPhoneOpensTheLocalShell() {
         XCTAssertEqual(DeepLink.connect(host: "this iphone").resolve(in: store), .local)
     }

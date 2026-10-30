@@ -207,14 +207,19 @@ final class HostStore: ObservableObject {
         save()
     }
 
-    /// The saved host called `name` (ignoring case), for links that name a
-    /// host. Nil when the name is empty, unknown or shared by several hosts:
-    /// a link never guesses.
+    /// The saved host called `name` (ignoring case and apostrophe style, since
+    /// macOS names a Mac "Brendan’s MacBook Pro" with a curly one), for links
+    /// that name a host. Nil when the name is empty, unknown or shared by
+    /// several hosts: a link never guesses.
     func host(named name: String) -> Host? {
-        let name = name.trimmingCharacters(in: .whitespaces)
+        let name = Self.straightened(name.trimmingCharacters(in: .whitespaces))
         guard !name.isEmpty else { return nil }
-        let matches = hosts.filter { $0.name.caseInsensitiveCompare(name) == .orderedSame }
+        let matches = hosts.filter { Self.straightened($0.name).caseInsensitiveCompare(name) == .orderedSame }
         return matches.count == 1 ? matches[0] : nil
+    }
+
+    private static func straightened(_ name: String) -> String {
+        name.replacingOccurrences(of: "\u{2019}", with: "'").replacingOccurrences(of: "\u{2018}", with: "'")
     }
 
     /// Remember other addresses a host reported for itself.
