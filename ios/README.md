@@ -188,8 +188,9 @@ home folder with a share sheet for each.
 ### Shortcuts from Ghostty
 
 Settings > Shortcuts offers ready-made Shortcuts with an "Add to Shortcuts"
-button (`shortcuts://import-shortcut?url=…`, which shows Apple's Add Shortcut
-screen). They are written in `shortcuts/*.cherri`, signed on a Mac with
+button that opens the shortcut's iCloud share link (`Offering.iCloudLink`, made
+by hand with Share > Copy iCloud Link), which shows Apple's Add Shortcut
+screen. They are written in `shortcuts/*.cherri`, signed on a Mac with
 `scripts/build-shortcuts.sh` (`brew install electrikmilk/cherri/cherri`) and
 published to GitHub Pages by `.github/workflows/ios-shortcuts.yml` (push a tag
 named `ios-shortcuts-*`). The address is `ShortcutLinks.baseURL`.
