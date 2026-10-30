@@ -207,6 +207,16 @@ final class HostStore: ObservableObject {
         save()
     }
 
+    /// The saved host called `name` (ignoring case), for links that name a
+    /// host. Nil when the name is empty, unknown or shared by several hosts:
+    /// a link never guesses.
+    func host(named name: String) -> Host? {
+        let name = name.trimmingCharacters(in: .whitespaces)
+        guard !name.isEmpty else { return nil }
+        let matches = hosts.filter { $0.name.caseInsensitiveCompare(name) == .orderedSame }
+        return matches.count == 1 ? matches[0] : nil
+    }
+
     /// Remember other addresses a host reported for itself.
     func learnRoutes(_ routes: [HostRoute], for hostID: UUID) {
         guard let index = hosts.firstIndex(where: { $0.id == hostID }),

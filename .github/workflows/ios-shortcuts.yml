@@ -1,0 +1,49 @@
+name: iOS Shortcuts
+
+# Builds and signs the Shortcuts in ios/shortcuts and publishes them to GitHub
+# Pages at /shortcuts/, where the iOS app's "Add to Shortcuts" links point
+# (ios/Sources/UI/ShortcutLinks.swift). Signing needs macOS.
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - "ios-shortcuts-*"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ios-shortcuts
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Install Cherri
+        run: brew install electrikmilk/cherri/cherri
+
+      - name: Build and sign
+        run: ios/scripts/build-shortcuts.sh "$RUNNER_TEMP/site/shortcuts"
+
+      - name: Upload site
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: ${{ runner.temp }}/site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

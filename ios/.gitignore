@@ -3,3 +3,6 @@ GhosttyiOS.xcodeproj/
 build/
 Frameworks/
 Frameworks-sim/
+
+# Signed Shortcuts built by scripts/build-shortcuts.sh
+shortcuts/dist/

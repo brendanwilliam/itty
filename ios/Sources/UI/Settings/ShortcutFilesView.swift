@@ -6,10 +6,38 @@ import SwiftUI
 /// Files are unsigned unless compiled with `cherri --sign`, which sends the
 /// shortcut to a signing service (opt-in, needs a connection).
 struct ShortcutFilesView: View {
+    @Environment(\.openURL) private var openURL
     @State private var files: [URL] = []
+    /// An offering the Shortcuts app wouldn't open, whose file address is shown instead.
+    @State private var unopened: ShortcutLinks.Offering?
 
     var body: some View {
         List {
+            Section {
+                ForEach(ShortcutLinks.offerings) { offering in
+                    Button {
+                        openURL(ShortcutLinks.importURL(for: offering)) { accepted in
+                            unopened = accepted ? nil : offering
+                        }
+                    } label: {
+                        VStack(alignment: .leading, spacing: 2) {
+                            Label("Add \(offering.name) to Shortcuts", systemImage: "plus.square")
+                            Text(offering.summary).font(.caption).foregroundStyle(.secondary)
+                        }
+                    }
+                }
+                if let unopened {
+                    Text("The Shortcuts app didn't open. Add this file from a browser on a device that has it:")
+                        .font(.footnote)
+                        .foregroundStyle(.secondary)
+                    CodeBlock(text: ShortcutLinks.fileURL(for: unopened).absoluteString, wraps: true)
+                }
+            } header: {
+                Text("From Ghostty")
+            } footer: {
+                Text("Shortcuts asks you to confirm before adding one, and you can edit it afterwards.")
+            }
+
             if files.isEmpty {
                 Section {
                     Text("No shortcuts yet.")

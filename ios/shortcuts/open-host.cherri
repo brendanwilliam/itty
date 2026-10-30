@@ -1,0 +1,10 @@
+/* Opens a saved Ghostty host. */
+
+#define name Open Host
+#define glyph terminal
+#define color gray
+
+#question hostName "Which Ghostty host should this open? Use its name as saved in the app." "My Mac"
+
+@encoded = urlEncode(hostName)
+openURL("ghostty-ios://connect?host={@encoded}")

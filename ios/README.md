@@ -177,3 +177,17 @@ home folder with a share sheet for each.
 - **Not available.** Commands that need macOS (`--open`, the Shortcuts
   database for `--import`/actions lookups) and package installs through
   git.
+
+
+### Shortcuts from Ghostty
+
+Settings > Shortcuts offers ready-made Shortcuts with an "Add to Shortcuts"
+button (`shortcuts://import-shortcut?url=…`, which shows Apple's Add Shortcut
+screen). They are written in `shortcuts/*.cherri`, signed on a Mac with
+`scripts/build-shortcuts.sh` (`brew install electrikmilk/cherri/cherri`) and
+published to GitHub Pages by `.github/workflows/ios-shortcuts.yml` (push a tag
+named `ios-shortcuts-*`). The address is `ShortcutLinks.baseURL`.
+
+Open Host uses the `ghostty-ios://connect?host=<name>` link, which opens a
+saved host and nothing else (`Sources/App/DeepLink.swift`). See
+`shortcuts/README.md`.

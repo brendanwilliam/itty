@@ -9,9 +9,11 @@ struct HostListView: View {
     @State private var showingSettings = false
     /// A host whose sessions are about to be ended, pending confirmation.
     @State private var ending: Host?
+    /// The hosts pushed on the navigation stack, so a link can open one.
+    @State private var path: [Host] = []
 
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $path) {
             List {
                 Section {
                     NavigationLink(value: Host.local) {
@@ -121,6 +123,14 @@ struct HostListView: View {
                 Text(host.isLocal
                      ? "Closes every tab and stops the programs running in them."
                      : "Closes every tab and ends the programs running in them on the host.")
+            }
+            .onOpenURL { url in
+                // Only opens a host that is already saved; see DeepLink.
+                guard let host = DeepLink.parse(url)?.resolve(in: store) else { return }
+                editing = nil
+                showingKey = false
+                showingSettings = false
+                path = [host]
             }
             .onAppear { bonjour.start() }
             .onDisappear { bonjour.stop() }
