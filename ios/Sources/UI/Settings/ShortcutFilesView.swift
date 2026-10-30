@@ -16,7 +16,9 @@ struct ShortcutFilesView: View {
             Section {
                 ForEach(ShortcutLinks.offerings) { offering in
                     Button {
-                        openURL(ShortcutLinks.importURL(for: offering)) { accepted in
+                        // The shortcuts://import-shortcut link answers "The shortcut URL
+                        // provided was invalid" on a device, so hand the file to the browser.
+                        openURL(ShortcutLinks.fileURL(for: offering)) { accepted in
                             unopened = accepted ? nil : offering
                         }
                     } label: {
@@ -27,7 +29,7 @@ struct ShortcutFilesView: View {
                     }
                 }
                 if let unopened {
-                    Text("The Shortcuts app didn't open. Add this file from a browser on a device that has it:")
+                    Text("The browser didn't open. Download this file, then open it in Shortcuts:")
                         .font(.footnote)
                         .foregroundStyle(.secondary)
                     CodeBlock(text: ShortcutLinks.fileURL(for: unopened).absoluteString, wraps: true)
@@ -35,7 +37,7 @@ struct ShortcutFilesView: View {
             } header: {
                 Text("From itty")
             } footer: {
-                Text("Shortcuts asks you to confirm before adding one, and you can edit it afterwards.")
+                Text("Opens the file in your browser. Download it, then open it in Shortcuts, which asks you to confirm before adding it. You can edit it afterwards.")
             }
 
             if files.isEmpty {
