@@ -14,13 +14,25 @@ enum ShortcutLinks {
         /// The name Shortcuts shows, and the stem of the hosted file.
         let name: String
         let summary: String
+        /// The shortcut's iCloud share link, made by hand with Share → Copy iCloud Link.
+        /// Opening it goes straight to Apple's "Add Shortcut" screen.
+        var iCloudLink: URL?
         var id: String { name }
         var fileName: String { "\(name).shortcut" }
     }
 
     static let offerings = [
-        Offering(name: "Open Host", summary: "Asks for a saved host's name, then opens it in itty."),
+        Offering(
+            name: "Open Host",
+            summary: "Asks for a saved host's name, then opens it in itty.",
+            iCloudLink: URL(string: "https://www.icloud.com/shortcuts/fa8b13ccbe564ee9a4e84f89fb811d95")),
     ]
+
+    /// What the "Add to Shortcuts" button opens: the iCloud link when there is one,
+    /// otherwise the hosted file, which the browser downloads.
+    static func addURL(for offering: Offering, base: URL = baseURL) -> URL {
+        offering.iCloudLink ?? fileURL(for: offering, base: base)
+    }
 
     /// The hosted file for an offering.
     static func fileURL(for offering: Offering, base: URL = baseURL) -> URL {

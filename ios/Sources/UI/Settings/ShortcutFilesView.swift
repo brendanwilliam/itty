@@ -17,8 +17,8 @@ struct ShortcutFilesView: View {
                 ForEach(ShortcutLinks.offerings) { offering in
                     Button {
                         // The shortcuts://import-shortcut link answers "The shortcut URL
-                        // provided was invalid" on a device, so hand the file to the browser.
-                        openURL(ShortcutLinks.fileURL(for: offering)) { accepted in
+                        // provided was invalid" on a device, so open the iCloud link instead.
+                        openURL(ShortcutLinks.addURL(for: offering)) { accepted in
                             unopened = accepted ? nil : offering
                         }
                     } label: {
@@ -37,7 +37,7 @@ struct ShortcutFilesView: View {
             } header: {
                 Text("From itty")
             } footer: {
-                Text("Opens the file in your browser. Download it, then open it in Shortcuts, which asks you to confirm before adding it. You can edit it afterwards.")
+                Text("Shortcuts asks you to confirm before adding one, and you can edit it afterwards.")
             }
 
             if files.isEmpty {
